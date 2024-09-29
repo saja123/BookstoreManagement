@@ -1,0 +1,17 @@
+﻿@model BookstoreManagement.Models.Book
+
+<h2>Edit Book</h2>
+
+@if (Model != null)
+{
+    <form method="post" asp-controller="Book" asp-action="Edit">
+        <partial name="BookForm" model="Model" /> 
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+}
+else
+{
+    <p>No data available to display the form.</p>
+}
+
+<a asp-action="Index">Back to List</a>

@@ -1,0 +1,26 @@
+﻿@model BookstoreManagement.Models.Book
+
+<h2>Delete a Book</h2>
+
+<div>
+    <h4>Are you shoure you want delete a Book?</h4>
+    <hr />
+    <div>
+        <strong>Title : </strong> @Model.Title
+    </div>
+    <div>
+        <strong>Authore : </strong> @Model.Author
+    </div>
+    <div>
+        <strong>Price : </strong> @Model.Price
+    </div>
+    <div>
+        <strong>Genere : </strong> @Model.Genre
+    </div>
+</div>
+
+<form method="post" asp-controller="Book" asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using BookstoreManagement.Models;  
+
 namespace BookstoreManagement
 {
     public class Program
@@ -7,7 +10,11 @@ namespace BookstoreManagement
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+            // Configure the DbContext with SQL Server
+            builder.Services.AddDbContext<BookstoreContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             var app = builder.Build();
 
@@ -15,8 +22,7 @@ namespace BookstoreManagement
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                app.UseHsts();  // Enables HTTP Strict Transport Security
             }
 
             app.UseHttpsRedirection();
@@ -26,6 +32,7 @@ namespace BookstoreManagement
 
             app.UseAuthorization();
 
+            // Map default route
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
