@@ -1,0 +1,10 @@
+﻿@model BookstoreManagement.Models.Book
+
+<h2>Create a new Book</h2>
+
+<form method="post" asp-controller="Book" asp-action="Create">
+    <partial name="BookForm" model="Model" /> 
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+<a asp-action="Index">Back to List</a>
